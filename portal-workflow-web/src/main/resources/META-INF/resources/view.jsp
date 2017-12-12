@@ -16,16 +16,18 @@
 
 <%@ include file="/init.jsp" %>
 
+<liferay-ui:success key='<%= portletName + "requestProcessed" %>' message="your-request-completed-successfully" />
+
 <liferay-util:include page="/navigation.jsp" servletContext="<%= application %>">
-	<liferay-util:param name="searchPage" value="<%= dynamicInclude.getSearchJspPath() %>" />
+	<liferay-util:param name="searchPage" value="<%= selectedWorkflowPortletTab.getSearchJspPath() %>" />
 
 	<%
-	PortletURL searchURL = dynamicInclude.getSearchURL(renderRequest, renderResponse);
+	PortletURL searchURL = selectedWorkflowPortletTab.getSearchURL(renderRequest, renderResponse);
 	%>
 
 	<liferay-util:param name="searchURL" value="<%= searchURL.toString() %>" />
 </liferay-util:include>
 
 <%
-dynamicInclude.include(request, PipingServletResponse.createPipingServletResponse(pageContext), null);
+selectedWorkflowPortletTab.include(request, PipingServletResponse.createPipingServletResponse(pageContext), null);
 %>
